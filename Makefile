@@ -4,7 +4,8 @@ CFLAGS = -g -Wall -Werror -Wextra
 
 # Source dir and files
 SRC_DIR = src
-SRCS = src/create_stack.c src/main.c 
+SRCS = src/count_size.c src/create_node.c src/create_stack.c src/find_smallest.c src/init_nodes.c src/main.c src/move_nodes.c \
+	src/pa_pb.c src/pushswap.c src/ra_rb_rr.c src/rra_rrb_rrr.c src/sa_sb_ss.c src/sort_four_five.c src/sort_three.c 
 
 # Object files
 OBJ_DIR = obj
