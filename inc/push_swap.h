@@ -26,4 +26,6 @@ typedef struct s_stack
 	t_node *tail;
 } t_stack;
 
+t_stack *create_stack(void);
+
 #endif

@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 #include <stdio.h>
 
 
@@ -124,19 +124,6 @@ t_node *create_node(long data)
 	new_node->next = NULL;
 	new_node->prev = NULL;
 	return new_node;
-}
-
-t_stack *create_stack()
-{
-	t_stack *new_stack = (t_stack *)malloc(sizeof(t_stack));
-	if (!new_stack)
-	{
-		perror("Failed to allocate memory for stack");
-		exit(1);
-	}
-	new_stack->head = NULL;
-	new_stack->tail = NULL;
-	return new_stack;
 }
 
 void append(t_stack **stack, long data)
@@ -822,8 +809,11 @@ void free_stack(t_stack **stack)
 
 int main(void)
 {
-	t_stack *a = create_stack();
-	t_stack *b = create_stack();
+	t_stack *a;
+	t_stack *b;
+
+	a = create_stack();
+	b = create_stack();
 
 	// Define your array of numbers
 	//long numbers[] = {27, 17, 37, 21, 11, 35};
