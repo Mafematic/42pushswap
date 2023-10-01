@@ -2,8 +2,6 @@
 #include <stdio.h>
 
 
-
-
 int count_size(t_stack *stack)
 {
 	int count = 0;
@@ -798,6 +796,30 @@ void push_swap(t_stack **a, t_stack **b)
 		}
 }
 
+void free_stack(t_stack **stack)
+{
+    if (!*stack)
+        return;
+
+    t_node *current = (*stack)->head;
+
+    if (current)
+    {
+        t_node *next_node;
+
+        do
+        {
+            next_node = current->next;
+            free(current);
+            current = next_node;
+        } while (current != (*stack)->head);  // This ensures that you only traverse the list once
+    }
+
+    free(*stack);
+    *stack = NULL;  // To make sure the pointer points to nothing after being freed
+}
+
+
 int main(void)
 {
 	t_stack *a = create_stack();
@@ -858,9 +880,8 @@ int main(void)
 	}
 
 	display(a);
-	// Remember to free your stack at the end
-	//free_stack(&a);
-
+	free_stack(&a);
+	free_stack(&b);
 
 	return 0;
 }
