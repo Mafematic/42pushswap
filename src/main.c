@@ -131,7 +131,7 @@ long	ft_atoi(const char *nptr)
 	return (num * is_negative);
 }
 
-void process_and_append_number(char *number_str, t_stack **a)
+int process_and_append_number(char *number_str, t_stack **a)
 {
     long nbr = ft_atoi(number_str);  // Convert string argument to long
 
@@ -139,14 +139,14 @@ void process_and_append_number(char *number_str, t_stack **a)
     if (nbr == 0 && number_str[0] != '0')
     {
         fprintf(stderr, "Invalid number: %s\n", number_str);
-        exit(1);
+        return(1);
     }
 
     // Check if nbr is within INT_MIN and INT_MAX range
     if (nbr > INT_MAX || nbr < INT_MIN)
     {
         fprintf(stderr, "Number out of range: %ld\n", nbr);
-        exit(1);
+        return(1);
     }
 
 	// Check for syntax errors or other conditions
@@ -158,6 +158,7 @@ void process_and_append_number(char *number_str, t_stack **a)
 
     // Append the number to stack 'a'
     append(a, nbr);
+	return 0;
 }
 
 int main(int argc, char **argv)
@@ -180,11 +181,28 @@ int main(int argc, char **argv)
 	if (argc == 2) 
     {
         char **numbers = ft_split(argv[1], ' ');
+	
         int i = 0;
         while (numbers[i])
         {
-            process_and_append_number(numbers[i], &a);
-            i++;
+            if (process_and_append_number(numbers[i], &a) != 0) 
+			{
+				// Handle the error (print a message, for instance)
+				printf("Error: Invalid input detected.\n");
+				
+				// Free the allocated memory
+				for (int j = 0; numbers[j]; j++)
+				{
+					free(numbers[j]);
+				}
+				free(numbers);
+				free_stack(&a);
+				free_stack(&b);
+
+				// Exit the program or continue to other tasks
+				exit(1);
+			}
+			i++;
         }
 
         // Free memory
