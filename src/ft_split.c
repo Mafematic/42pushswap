@@ -12,27 +12,11 @@
 
 #include "../inc/push_swap.h"
 
-int	contains_number(char *s, size_t len)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < len)
-	{
-		if (s[i] >= '0' && s[i] <= '9')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 static char	**counter(char *s, char c)
 {
 	int		i;
 	int		count;
 	char	**words;
-	size_t	start;
-	size_t	word_length;
 
 	i = 0;
 	count = 0;
@@ -40,12 +24,10 @@ static char	**counter(char *s, char c)
 	{
 		while (s[i] == c)
 			i++;
-		start = i;
+		if (s[i] != '\0')
+			count++;
 		while (s[i] != '\0' && s[i] != c)
 			i++;
-		word_length = i - start;
-		if (word_length > 0 && contains_number(s + start, word_length))
-			count++;
 	}
 	words = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!words)
@@ -53,46 +35,39 @@ static char	**counter(char *s, char c)
 	return (words);
 }
 
-static int	find_next_number(char *s, char c, size_t *start, size_t *end)
+static void	free_words(char **words, size_t j)
 {
-	size_t	i;
-
-	i = *start;
-	while (s[i] != '\0')
-	{
-		while (s[i] == c && s[i] != '\0')
-			i++;
-		*start = i;
-		while (s[i] != c && s[i] != '\0')
-			i++;
-		*end = i;
-		if (contains_number(s + *start, *end - *start))
-			return (1);
-		*start = *end;
-	}
-	return (0);
+	while (j > 0)
+		free(words[--j]);
+	free(words);
 }
 
 static char	**fill_words(char **words, char *s, char c)
 {
-	size_t	start;
-	size_t	end;
+	size_t	i;
 	size_t	j;
+	size_t	start;
 
-	start = 0;
-	j = 0;
-	while (find_next_number(s, c, &start, &end))
+	i = 0;
+	j = -1;
+	while (s[i] != '\0')
 	{
-		words[j] = ft_substr(s, start, end - start);
-		if (!words[j])
+		while (s[i] == c && s[i] != '\0')
+			i++;
+		start = i;
+		while (s[i] != c && s[i] != '\0')
+			i++;
+		if (s[start] != c && s[start])
 		{
-			free_words(words);
-			return (NULL);
+			words[++j] = ft_substr(s, start, i - start);
+			if (!words[j])
+			{
+				free_words(words, j);
+				return (NULL);
+			}
 		}
-		j++;
-		start = end;
 	}
-	words[j] = NULL;
+	words[++j] = NULL;
 	return (words);
 }
 
@@ -105,10 +80,6 @@ char	**ft_split(char *s, char c)
 	words = counter(s, c);
 	if (!words)
 		return (NULL);
-	if (!fill_words(words, s, c))
-	{
-		free(words);
-		return (NULL);
-	}
+	words = fill_words(words, s, c);
 	return (words);
 }

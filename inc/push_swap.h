@@ -30,7 +30,6 @@ int count_size(t_stack *stack);
 t_node *create_node(long data);
 t_stack *create_stack(void);
 t_node *find_smallest(t_stack *stack);
-void	free_words(char **words);
 char	**ft_split(char *s, char c);
 char	*ft_strdup(char *s);
 size_t	ft_strlen(char *str);
