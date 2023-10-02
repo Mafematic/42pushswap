@@ -42,13 +42,13 @@ void display(t_stack *stack)
 
 // Initialize a new node
 
-void append(t_stack **stack, long data)
+int append(t_stack **stack, long data)
 {
 	t_node *new_node = create_node(data);
 	if (!new_node)
 	{
 		perror("Failed to allocate memory for new node");
-		exit(1);
+		return (1);
 	}
 
 	if ((*stack)->head == NULL && (*stack)->tail == NULL)
@@ -68,6 +68,7 @@ void append(t_stack **stack, long data)
 		(*stack)->head->prev = new_node; // The head's previous points to new_node
 		(*stack)->tail = new_node;		 // Update the tail of the list
 	}
+	return 0;
 }
 
 void free_stack(t_stack **stack)
@@ -148,16 +149,9 @@ int process_and_append_number(char *number_str, t_stack **a)
         fprintf(stderr, "Number out of range: %ld\n", nbr);
         return(1);
     }
-
-	// Check for syntax errors or other conditions
-		// if (error_syntax(numbers[i]))
-		//{
-		// Handle the error if needed
-		// }
-
-
     // Append the number to stack 'a'
-    append(a, nbr);
+    if (append(a, nbr) != 0)
+		return 1;
 	return 0;
 }
 
@@ -216,7 +210,13 @@ int main(int argc, char **argv)
     {
         for (int i = 1; i < argc; i++)
         {
-            process_and_append_number(argv[i], &a);
+            if (process_and_append_number(argv[i], &a) != 0)
+			{
+				printf("Error: Invalid input detected for argument %d.\n", i);
+				free_stack(&a);
+				free_stack(&b);
+				exit(1);
+			}
         }
     }
 	display(a);
@@ -242,6 +242,5 @@ int main(int argc, char **argv)
 	display(a);
 	free_stack(&a);
 	free_stack(&b);
-
 	return 0;
 }
