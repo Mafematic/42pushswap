@@ -15,9 +15,9 @@ typedef struct s_node
 	struct s_node *prev;
 	struct s_node *target_node;
 	bool above_median;
-	bool cheapest;
+	bool best_match;
 	int current_position;
-	int push_price;
+	int push_sum;
 } t_node;
 
 typedef struct s_stack
@@ -48,10 +48,10 @@ void rrr(t_stack **a, t_stack **b);
 void sa(t_stack **a);
 void sb(t_stack **b);
 void ss(t_stack **a, t_stack **b);
-void set_cheapest(t_stack *b);
-void set_current_position(t_stack *stack);
-void set_price(t_stack *a, t_stack *b);
-void set_target_node(t_stack *a, t_stack *b);
+void set_addition(t_stack *a, t_stack *b);
+void set_best_node(t_stack *b);
+void set_position(t_stack *stack);
+void set_target_nodes(t_stack *a, t_stack *b);
 void sort_size_three(t_stack **a);
 void sort_size_four(t_stack **a, t_stack **b);
 void sort_size_five(t_stack **a, t_stack **b, int size);

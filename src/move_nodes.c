@@ -7,8 +7,8 @@ static void reverse_rotate_both(t_stack **a, t_stack **b, t_node *cheapest_node)
 		rrr(a, b);
 		printf("rrr\n");
 	}
-	set_current_position(*a);
-	set_current_position(*b);
+	set_position(*a);
+	set_position(*b);
 }
 
 static void rotate_both(t_stack **a, t_stack **b, t_node *cheapest_node)
@@ -18,8 +18,8 @@ static void rotate_both(t_stack **a, t_stack **b, t_node *cheapest_node)
 		rr(a, b);
 		printf("rr\n");
 	}
-	set_current_position(*a);
-	set_current_position(*b);
+	set_position(*a);
+	set_position(*b);
 }
 
 static void finish_rotation(t_stack **stack, t_node *top_node, char stack_name)
@@ -67,7 +67,7 @@ static t_node *return_cheapest(t_stack *stack)
 	current_node = stack->head;
 	while (current_node)
 	{
-		if (current_node->cheapest)
+		if (current_node->best_match)
 			return current_node;
 		current_node = current_node->next;
 	}
