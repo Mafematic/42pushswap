@@ -13,7 +13,7 @@ void ra(t_stack **a)
 
 void rb(t_stack **b)
 {
-	ra(b); // Use the same logic for rb as ra
+	ra(b);
 }
 
 void rr(t_stack **a, t_stack **b)

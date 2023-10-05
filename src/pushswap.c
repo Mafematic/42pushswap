@@ -1,22 +1,52 @@
 #include "../inc/push_swap.h"
 
-void push_swap(t_stack **a, t_stack **b)
+static void	push_elements_to_b(t_stack **a, t_stack **b, int len)
 {
-	t_node *smallest;
-	int len_a;
+	while (len-- > 3)
+	{
+		if (pb(a, b) != 0)
+		{
+			free_stack(a);
+			free_stack(b);
+			//write(1, "Error\n", 6);
+			exit(1);
+		}
+		//write(1, "pb\n", 3);
+		printf("pb\n");
+	}
+}
 
-	len_a = count_size(*a);
-	if (len_a == 5)
-		sort_size_five(a, b, 5);
+static void	position_smallest_at_head(t_stack **a)
+{
+	t_node	*smallest;
+
+	smallest = find_smallest(*a);
+	if (smallest->above_mid)
+	{
+		while ((*a)->head != smallest)
+		{
+			ra(a);
+			//write(1, "ra\n", 3);
+			printf("ra\n");
+		}
+	}
 	else
 	{
-		while (len_a-- > 3)
+		while ((*a)->head != smallest)
 		{
-			pb(a, b);
-			printf("pb\n");
+			rra(a);
+			//write(1, "rra\n", 4);
+			printf("rra\n");
 		}
-			
 	}
+}
+
+void	push_swap(t_stack **a, t_stack **b)
+{
+	int	len_a;
+
+	len_a = count_size(*a);
+	push_elements_to_b(a, b, len_a);
 	sort_size_three(a);
 	while ((*b)->head)
 	{
@@ -24,17 +54,5 @@ void push_swap(t_stack **a, t_stack **b)
 		move_nodes(a, b);
 	}
 	set_position(*a);
-	smallest = find_smallest(*a);
-	if (smallest->above_median)
-		while ((*a)->head != smallest)
-		{
-			ra(a);
-			printf("ra\n");
-		}
-	else
-		while ((*a)->head != smallest)
-		{
-			rra(a);
-			printf("rra\n");
-		}
+	position_smallest_at_head(a);
 }

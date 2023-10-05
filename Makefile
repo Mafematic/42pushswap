@@ -4,11 +4,12 @@ CFLAGS = -g -Wall -Werror -Wextra
 
 # Source dir and files
 SRC_DIR = src
-SRCS = src/count_size.c src/create_node.c src/create_stack.c src/find_smallest.c src/ft_split.c src/ft_strdup.c src/ft_substr.c src/ft_strlen.c src/init_nodes.c src/main.c src/move_nodes.c \
-	src/pa_pb.c src/pushswap.c src/ra_rb_rr.c src/rra_rrb_rrr.c src/sa_sb_ss.c src/set_target_nodes.c src/sort_four_five.c src/sort_three.c 
+SRCS = src/count_size.c src/create_node.c src/create_stack.c src/find_smallest.c src/free_stack.c src/ft_split.c src/ft_strdup.c src/ft_substr.c src/ft_strlen.c src/init_nodes.c src/main.c src/move_nodes.c \
+	src/pa_pb.c src/perform_rotation.c src/pushswap.c src/ra_rb_rr.c src/rra_rrb_rrr.c src/sa_sb_ss.c src/set_target_nodes.c src/sort_four_five.c src/sort_three.c 
 
 BONUS_SRC_DIR = bonus/src
-BONUS_SRCS = bonus/src/get_next_line.c bonus/src/get_next_line_utils.c bonus/src/main.c
+BONUS_SRCS = bonus/src/get_next_line.c bonus/src/get_next_line_utils.c bonus/src/main.c \
+			bonus/src/create_stack.c
 
 # Object files
 OBJ_DIR = obj

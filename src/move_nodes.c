@@ -1,8 +1,8 @@
 #include "../inc/push_swap.h"
 
-static void reverse_rotate_both(t_stack **a, t_stack **b, t_node *cheapest_node)
+static void	reverse_rotate_both(t_stack **a, t_stack **b, t_node *best_node)
 {
-	while ((*a)->head != cheapest_node->target_node && (*b)->head != cheapest_node)
+	while ((*a)->head != best_node->target_node && (*b)->head != best_node)
 	{
 		rrr(a, b);
 		printf("rrr\n");
@@ -11,9 +11,9 @@ static void reverse_rotate_both(t_stack **a, t_stack **b, t_node *cheapest_node)
 	set_position(*b);
 }
 
-static void rotate_both(t_stack **a, t_stack **b, t_node *cheapest_node)
+static void	rotate_both(t_stack **a, t_stack **b, t_node *best_node)
 {
-	while ((*a)->head != cheapest_node->target_node && (*b)->head != cheapest_node)
+	while ((*a)->head != best_node->target_node && (*b)->head != best_node)
 	{
 		rr(a, b);
 		printf("rr\n");
@@ -22,71 +22,43 @@ static void rotate_both(t_stack **a, t_stack **b, t_node *cheapest_node)
 	set_position(*b);
 }
 
-static void finish_rotation(t_stack **stack, t_node *top_node, char stack_name)
+static t_node	*return_best_node(t_stack *stack)
 {
-	while ((*stack)->head != top_node)
-	{
-		if (stack_name == 'a')
-		{
-			if (top_node->above_median)
-			{
-				ra(stack);
-				printf("ra\n");
-			}
-			else
-			{
-				rra(stack);
-				printf("rra\n");
-			}
-				
-		}
-		else if (stack_name == 'b')
-		{
-			if (top_node->above_median)
-			{
-				rb(stack);
-				printf("rb\n");
-			}
-			else
-			{
-				rrb(stack);
-				printf("rrb\n");
-			}
-			
-		}
-	}
-}
-
-static t_node *return_cheapest(t_stack *stack)
-{
-	t_node *current_node;
+	t_node	*current_node;
+	t_node	*start_node;
 
 	if (stack == NULL || stack->head == NULL)
-		return NULL;
-
+		return (NULL);
 	current_node = stack->head;
+	start_node = stack->head;
 	while (current_node)
 	{
 		if (current_node->best_match)
-			return current_node;
+			return (current_node);
 		current_node = current_node->next;
+		if (current_node == start_node)
+			break ;
 	}
-	return NULL;
+	return (NULL);
 }
 
-void move_nodes(t_stack **a, t_stack **b)
+void	move_nodes(t_stack **a, t_stack **b)
 {
-	t_node *cheapest_node;
+	t_node	*best_node;
 
-	cheapest_node = return_cheapest(*b);
-	if (cheapest_node->above_median && cheapest_node->target_node->above_median)
-		rotate_both(a, b, cheapest_node);
-	else if (!(cheapest_node->above_median) && !(cheapest_node->target_node->above_median))
-		reverse_rotate_both(a, b, cheapest_node);
-	finish_rotation(b, cheapest_node, 'b');
-	finish_rotation(a, cheapest_node->target_node, 'a');
-	pa(a, b);
+	best_node = return_best_node(*b);
+	if (best_node->above_mid && best_node->target_node->above_mid)
+		rotate_both(a, b, best_node);
+	else if (!(best_node->above_mid) && !(best_node->target_node->above_mid))
+		reverse_rotate_both(a, b, best_node);
+	finish_rotation(b, best_node, 'b');
+	finish_rotation(a, best_node->target_node, 'a');
+	if (pa(a, b) != 0)
+	{
+		free_stack(a);
+		free_stack(b);
+		exit(1);
+	}
+	//write(1, "pa\n", 3);
 	printf("pa\n");
-	//display(*a);
-	//display(*b);
 }

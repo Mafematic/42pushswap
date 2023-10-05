@@ -62,14 +62,24 @@ void sort_size_four(t_stack **a, t_stack **b)
 	}
 
 	// Push the minimum value to stack_b
-	pb(a, b);
+	if (pb(a, b) != 0)
+	{
+		free_stack(a);
+		free_stack(b);
+		exit(1);
+	}
 	printf("pb\n");
 
 	// Sort the remaining 3 elements
 	sort_size_three(a);
 
 	// Pop the element back from stack_b to stack_a
-	pa(a, b);
+	if (pa(a, b) != 0)
+	{
+		free_stack(a);
+		free_stack(b);
+		exit(1);
+	}
 	printf("pa\n");
 }
 
@@ -95,13 +105,23 @@ void sort_size_five(t_stack **a, t_stack **b, int size)
 		}
 	}
 
-	pb(a, b);
+	if (pb(a, b) != 0)
+	{
+		free_stack(a);
+		free_stack(b);
+		exit(1);
+	}
 	printf("pb\n");
 
 	size--;
 
 	sort_size_four(a, b);
 
-	pa(a, b);
+	if (pa(a, b) != 0)
+	{
+		free_stack(a);
+		free_stack(b);
+		exit(1);
+	}
 	printf("pa\n");
 }

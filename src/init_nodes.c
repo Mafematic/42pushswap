@@ -38,9 +38,9 @@ void	set_addition(t_stack *a, t_stack *b)
 	while (current_b)
 	{
 		current_b->push_sum = current_b->current_position;
-		if (!(current_b->above_median))
+		if (!(current_b->above_mid))
 			current_b->push_sum = len_b - (current_b->current_position);
-		if (current_b->target_node->above_median)
+		if (current_b->target_node->above_mid)
 			current_b->push_sum += current_b->target_node->current_position;
 		else
 			current_b->push_sum += len_a
@@ -68,9 +68,9 @@ void	set_position(t_stack *stack)
 	{
 		current->current_position = i;
 		if (i <= mid)
-			current->above_median = true;
+			current->above_mid = true;
 		else
-			current->above_median = false;
+			current->above_mid = false;
 		current = current->next;
 		i++;
 		if (current == start)

@@ -1,24 +1,22 @@
 #include "../inc/push_swap.h"
 
-static void push(t_stack **stack, int x)
+static int	push(t_stack **stack, int num)
 {
-	t_node *t = create_node(x);
+	t_node	*t;
 
+	t = create_node(num);
 	if (!*stack || !(*stack)->head)
 	{
 		if (!*stack)
 		{
 			*stack = (t_stack *)malloc(sizeof(t_stack));
 			if (!*stack)
-			{
-				perror("Failed to initialize stack");
-				exit(1);
-			}
+				return (1);
 		}
 		(*stack)->head = t;
 		(*stack)->tail = t;
-		t->next = t; // Points to itself, as it's the only element
-		t->prev = t; // Points to itself
+		t->next = t;
+		t->prev = t;
 	}
 	else
 	{
@@ -28,19 +26,18 @@ static void push(t_stack **stack, int x)
 		(*stack)->tail->next = t;
 		(*stack)->head = t;
 	}
+	return (0);
 }
 
-static t_node *pop(t_stack **stack)
+static t_node	*pop(t_stack **stack)
 {
-	if (!*stack || !(*stack)->head)
-	{
-		return NULL;
-	}
+	t_node	*temp;
 
-	t_node *temp = (*stack)->head;
+	if (!*stack || !(*stack)->head)
+		return (NULL);
+	temp = (*stack)->head;
 	if ((*stack)->head == (*stack)->tail)
 	{
-		// Only one node left in the list
 		(*stack)->head->next = NULL;
 		(*stack)->head->prev = NULL;
 		(*stack)->head = NULL;
@@ -52,38 +49,45 @@ static t_node *pop(t_stack **stack)
 		(*stack)->tail->next = (*stack)->head;
 		(*stack)->head->prev = (*stack)->tail;
 	}
-	temp->next = NULL; // break the circular link for the node being popped
+	temp->next = NULL;
 	temp->prev = NULL;
-
-	return temp;
+	return (temp);
 }
 
-void pa(t_stack **a, t_stack **b)
+int	pa(t_stack **a, t_stack **b)
 {
-	t_node *node = pop(b);
+	t_node	*node;
+
+	node = pop(b);
 	if (node)
 	{
-		push(a, node->data);
-
+		if (push(a, node->data) != 0)
+		{
+			return (1);
+		}
 		if (!(*a)->head->next)
 		{
 			(*a)->tail = (*a)->head;
 		}
 		free(node);
 	}
+	return (0);
 }
 
-void pb(t_stack **a, t_stack **b)
+int	pb(t_stack **a, t_stack **b)
 {
-	t_node *node = pop(a);
+	t_node	*node;
+
+	node = pop(a);
 	if (node)
 	{
-		push(b, node->data);
-
+		if (push(b, node->data) != 0)
+			return (1);
 		if (!(*b)->head->next)
 		{
 			(*b)->tail = (*b)->head;
 		}
 		free(node);
 	}
+	return (0);
 }
