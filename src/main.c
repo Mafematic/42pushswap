@@ -219,7 +219,7 @@ int main(int argc, char **argv)
 			}
         }
     }
-	display(a);
+	//display(a);
 
 	//printf("%d\n", count_size(a));
 	if (!check_if_sorted(a))
@@ -239,7 +239,7 @@ int main(int argc, char **argv)
 			push_swap(&a, &b);
 	}
 
-	display(a);
+	//display(a);
 	free_stack(&a);
 	free_stack(&b);
 	return 0;
