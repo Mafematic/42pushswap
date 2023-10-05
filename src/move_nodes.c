@@ -5,7 +5,7 @@ static void	reverse_rotate_both(t_stack **a, t_stack **b, t_node *best_node)
 	while ((*a)->head != best_node->target_node && (*b)->head != best_node)
 	{
 		rrr(a, b);
-		printf("rrr\n");
+		write(1, "rrr\n", 4);
 	}
 	set_position(*a);
 	set_position(*b);
@@ -16,7 +16,7 @@ static void	rotate_both(t_stack **a, t_stack **b, t_node *best_node)
 	while ((*a)->head != best_node->target_node && (*b)->head != best_node)
 	{
 		rr(a, b);
-		printf("rr\n");
+		write(1, "rr\n", 3);
 	}
 	set_position(*a);
 	set_position(*b);
@@ -60,5 +60,5 @@ void	move_nodes(t_stack **a, t_stack **b)
 		exit(1);
 	}
 	//write(1, "pa\n", 3);
-	printf("pa\n");
+	write(1,"pa\n", 3);
 }

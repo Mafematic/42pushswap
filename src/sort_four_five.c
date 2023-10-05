@@ -49,7 +49,7 @@ void sort_size_four(t_stack **a, t_stack **b)
 		while ((*a)->head->data != min)
 		{
 			rra(a);
-			printf("rra\n");
+			write(1, "rra\n", 4);
 		}
 	}
 	else
@@ -57,7 +57,7 @@ void sort_size_four(t_stack **a, t_stack **b)
 		while ((*a)->head->data != min)
 		{
 			ra(a);
-			printf("ra\n");
+			write(1, "ra\n", 3);
 		}
 	}
 
@@ -68,7 +68,7 @@ void sort_size_four(t_stack **a, t_stack **b)
 		free_stack(b);
 		exit(1);
 	}
-	printf("pb\n");
+	write(1, "pb\n", 3);
 
 	// Sort the remaining 3 elements
 	sort_size_three(a);
@@ -80,7 +80,7 @@ void sort_size_four(t_stack **a, t_stack **b)
 		free_stack(b);
 		exit(1);
 	}
-	printf("pa\n");
+	write(1, "pa\n", 3);
 }
 
 void sort_size_five(t_stack **a, t_stack **b, int size)
@@ -93,7 +93,7 @@ void sort_size_five(t_stack **a, t_stack **b, int size)
 		while ((*a)->head->data != min)
 		{
 			rra(a);
-			printf("rra\n");
+			write(1, "rra\n", 4);
 		}
 	}
 	else
@@ -101,7 +101,7 @@ void sort_size_five(t_stack **a, t_stack **b, int size)
 		while ((*a)->head->data != min)
 		{
 			ra(a);
-			printf("ra\n");
+			write(1, "ra\n", 3);
 		}
 	}
 
@@ -111,7 +111,7 @@ void sort_size_five(t_stack **a, t_stack **b, int size)
 		free_stack(b);
 		exit(1);
 	}
-	printf("pb\n");
+	write(1, "pb\n", 3);
 
 	size--;
 
@@ -123,5 +123,5 @@ void sort_size_five(t_stack **a, t_stack **b, int size)
 		free_stack(b);
 		exit(1);
 	}
-	printf("pa\n");
+	write(1, "pa\n", 3);
 }

@@ -204,7 +204,7 @@ int main(int argc, char **argv)
 		if (count_size(a) == 2)
 		{
 			sa(&a);
-			printf("sa\n");
+			write(1, "sa\n", 3);
 		}
 		else if (count_size(a) == 3)
 			sort_size_three(&a);

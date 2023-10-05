@@ -12,7 +12,7 @@ static void	push_elements_to_b(t_stack **a, t_stack **b, int len)
 			exit(1);
 		}
 		//write(1, "pb\n", 3);
-		printf("pb\n");
+		write(1, "pb\n", 3);
 	}
 }
 
@@ -27,7 +27,7 @@ static void	position_smallest_at_head(t_stack **a)
 		{
 			ra(a);
 			//write(1, "ra\n", 3);
-			printf("ra\n");
+			write(1, "ra\n", 3);
 		}
 	}
 	else
@@ -36,7 +36,7 @@ static void	position_smallest_at_head(t_stack **a)
 		{
 			rra(a);
 			//write(1, "rra\n", 4);
-			printf("rra\n");
+			write(1, "rra\n", 4);
 		}
 	}
 }

@@ -34,18 +34,18 @@ void sort_size_three(t_stack **a)
 	if ((*a)->head == highest_node)
 	{
 		ra(a);
-		printf("ra\n");
+		write(1, "ra\n", 3);
 	}
 		
 	else if ((*a)->head->next == highest_node)
 	{
 		rra(a);
-		printf("rra\n");
+		write(1, "rra\n", 4);
 	}
 	if ((*a)->head->data > (*a)->head->next->data)
 	{
 		sa(a);
-		printf("sa\n");
+		write(1, "sa\n", 3);
 	}
 	
 	/*

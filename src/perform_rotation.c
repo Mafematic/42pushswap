@@ -5,12 +5,12 @@ static void	perform_rotation_a(t_stack **stack, bool above_mid)
 	if (above_mid)
 	{
 		ra(stack);
-		printf("ra\n");
+		write(1, "ra\n", 3);
 	}
 	else
 	{
 		rra(stack);
-		printf("rra\n");
+		write(1, "rra\n", 4);
 	}
 }
 
@@ -19,12 +19,12 @@ static void	perform_rotation_b(t_stack **stack, bool above_mid)
 	if (above_mid)
 	{
 		rb(stack);
-		printf("rb\n");
+		write(1, "rb\n", 3);
 	}
 	else
 	{
 		rrb(stack);
-		printf("rrb\n");
+		write(1, "rrb\n", 4);
 	}
 }
 
