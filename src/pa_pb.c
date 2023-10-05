@@ -17,6 +17,8 @@ static int	push(t_stack **stack, int num)
 	t_node	*t;
 
 	t = create_node(num);
+	if (!t)
+		return (1);
 	if (!*stack || !(*stack)->head)
 	{
 		if (!*stack)

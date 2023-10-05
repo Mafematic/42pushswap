@@ -46,10 +46,7 @@ int append(t_stack **stack, long data)
 {
 	t_node *new_node = create_node(data);
 	if (!new_node)
-	{
-		perror("Failed to allocate memory for new node");
 		return (1);
-	}
 
 	if ((*stack)->head == NULL && (*stack)->tail == NULL)
 	{
@@ -139,6 +136,13 @@ int main(int argc, char **argv)
 
 	a = create_stack();
 	b = create_stack();
+	if (a == NULL || b == NULL)
+	{
+		free_stack(&a);
+		free_stack(&b);
+		write(1, "Error\n", 6);
+		exit(1);
+	}
 
 	// Define your array of numbers
 	//long numbers[] = {27, 17, 37, 21, 11, 35};
@@ -196,7 +200,7 @@ int main(int argc, char **argv)
 			}
         }
     }
-	//display(a);
+	display(a);
 
 	//printf("%d\n", count_size(a));
 	if (!check_if_sorted(a))
@@ -216,8 +220,15 @@ int main(int argc, char **argv)
 			push_swap(&a, &b);
 	}
 
-	//display(a);
+	display(a);
 	free_stack(&a);
 	free_stack(&b);
 	return 0;
 }
+
+/*
+Next Steps:
+Norminette
+Last Error check
+Checker finalization
+*/

@@ -71,6 +71,5 @@ void	move_nodes(t_stack **a, t_stack **b)
 		free_stack(b);
 		exit(1);
 	}
-	//write(1, "pa\n", 3);
-	write(1,"pa\n", 3);
+	write(1, "pa\n", 3);
 }

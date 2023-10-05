@@ -12,29 +12,28 @@
 
 #include "../inc/push_swap.h"
 
-
-static int find_min(t_stack *stack)
+static int	find_min(t_stack *stack)
 {
-	int min = INT32_MAX;
+	int		min;
+	t_node	*p;
+	int		first_run;
+
+	min = INT32_MAX;
 	if (!stack || !stack->head)
-		return min; // Return INT32_MAX if list is empty
-
-	t_node *p = stack->head;
-	int firstRun = 1;
-
-	while (firstRun || p != stack->head)
+		return (min);
+	p = stack->head;
+	first_run = 1;
+	while (first_run || p != stack->head)
 	{
 		if (p->data < min)
-		{
 			min = p->data;
-		}
 		p = p->next;
-		firstRun = 0;
+		first_run = 0;
 	}
-	return min;
+	return (min);
 }
 
-static int position_minimum(t_stack *stack, int min)
+static int	position_minimum(t_stack *stack, int min)
 {
 	int index = 0;
 	t_node *p = stack->head;
