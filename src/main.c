@@ -215,7 +215,7 @@ int main(int argc, char **argv)
 		else if (count_size(a) == 4)
 			sort_size_four(&a, &b);
 		else if (count_size(a) == 5)
-			sort_size_five(&a, &b, 5);
+			sort_size_five(&a, &b);
 		else
 			push_swap(&a, &b);
 	}

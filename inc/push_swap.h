@@ -56,6 +56,6 @@ void set_position(t_stack *stack);
 void set_target_nodes(t_stack *a, t_stack *b);
 void sort_size_three(t_stack **a);
 void sort_size_four(t_stack **a, t_stack **b);
-void sort_size_five(t_stack **a, t_stack **b, int size);
+void sort_size_five(t_stack **a, t_stack **b);
 
 #endif

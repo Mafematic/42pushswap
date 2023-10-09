@@ -35,27 +35,26 @@ static int	find_min(t_stack *stack)
 
 static int	position_minimum(t_stack *stack, int min)
 {
-	int index = 0;
-	t_node *p = stack->head;
+	int		index;
+	t_node	*p;
+
+	index = 0;
+	p = stack->head;
 	while (p != NULL)
 	{
 		if (min == p->data)
 		{
-			return index;
+			return (index);
 		}
 		index++;
 		p = p->next;
 	}
-	return -1;
+	return (-1);
 }
 
-void sort_size_four(t_stack **a, t_stack **b)
+static void	rotate_to_position(t_stack **a, int pos, int min)
 {
-	int min = find_min(*a);
-	int pos = position_minimum(*a, min);
-
-	// Move the minimum value to the top of the stack
-	if (pos == 2) // if position_minimum is 0-based
+	if (pos == 2)
 	{
 		while ((*a)->head->data != min)
 		{
@@ -71,68 +70,41 @@ void sort_size_four(t_stack **a, t_stack **b)
 			write(1, "ra\n", 3);
 		}
 	}
+}
 
-	// Push the minimum value to stack_b
-	if (pb(a, b) != 0)
+static void	safe_push(t_stack **source, t_stack **dest, char *action)
+{
+	if (pb(source, dest) != 0)
 	{
-		free_stack(a);
-		free_stack(b);
+		free_stack(source);
+		free_stack(dest);
 		exit(1);
 	}
-	write(1, "pb\n", 3);
+	write(1, action, ft_strlen(action));
+}
 
-	// Sort the remaining 3 elements
+void	sort_size_four(t_stack **a, t_stack **b)
+{
+	int	min;
+	int	pos;
+
+	min = find_min(*a);
+	pos = position_minimum(*a, min);
+	rotate_to_position(a, pos, min);
+	safe_push(a, b, "pb\n");
 	sort_size_three(a);
-
-	// Pop the element back from stack_b to stack_a
-	if (pa(a, b) != 0)
-	{
-		free_stack(a);
-		free_stack(b);
-		exit(1);
-	}
-	write(1, "pa\n", 3);
+	safe_push(b, a, "pa\n");
 }
 
-void sort_size_five(t_stack **a, t_stack **b, int size)
+void	sort_size_five(t_stack **a, t_stack **b)
 {
-	int min = find_min(*a);
-	int pos = position_minimum(*a, min);
+	int min;
+	int pos;
 
-	if (pos == 3 || pos == 4)
-	{
-		while ((*a)->head->data != min)
-		{
-			rra(a);
-			write(1, "rra\n", 4);
-		}
-	}
-	else
-	{
-		while ((*a)->head->data != min)
-		{
-			ra(a);
-			write(1, "ra\n", 3);
-		}
-	}
-
-	if (pb(a, b) != 0)
-	{
-		free_stack(a);
-		free_stack(b);
-		exit(1);
-	}
-	write(1, "pb\n", 3);
-
-	size--;
-
+	min = find_min(*a);
+	pos = position_minimum(*a, min);
+	rotate_to_position(a, pos, min);
+	safe_push(a, b, "pb\n");
 	sort_size_four(a, b);
-
-	if (pa(a, b) != 0)
-	{
-		free_stack(a);
-		free_stack(b);
-		exit(1);
-	}
-	write(1, "pa\n", 3);
+	safe_push(b, a, "pa\n");
 }

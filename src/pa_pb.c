@@ -19,14 +19,8 @@ static int	push(t_stack **stack, int num)
 	t = create_node(num);
 	if (!t)
 		return (1);
-	if (!*stack || !(*stack)->head)
+	if (!(*stack)->head)
 	{
-		if (!*stack)
-		{
-			*stack = (t_stack *)malloc(sizeof(t_stack));
-			if (!*stack)
-				return (1);
-		}
 		(*stack)->head = t;
 		(*stack)->tail = t;
 		t->next = t;
