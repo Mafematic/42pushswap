@@ -99,3 +99,14 @@ int	pb(t_stack **a, t_stack **b)
 	}
 	return (0);
 }
+
+void	safe_push(t_stack **source, t_stack **dest, char *action)
+{
+	if (pb(source, dest) != 0)
+	{
+		free_stack(source);
+		free_stack(dest);
+		exit(1);
+	}
+	write(1, action, ft_strlen(action));
+}

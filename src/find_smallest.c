@@ -37,3 +37,24 @@ t_node	*find_smallest(t_stack *stack)
 	}
 	return (smallest_node);
 }
+
+int	find_min(t_stack *stack)
+{
+	int		min;
+	t_node	*p;
+	int		first_run;
+
+	min = INT32_MAX;
+	if (!stack || !stack->head)
+		return (min);
+	p = stack->head;
+	first_run = 1;
+	while (first_run || p != stack->head)
+	{
+		if (p->data < min)
+			min = p->data;
+		p = p->next;
+		first_run = 0;
+	}
+	return (min);
+}

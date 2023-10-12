@@ -26,12 +26,17 @@ typedef struct s_stack
 	t_node *tail;
 } t_stack;
 
+int	append(t_stack **stack, long data);
+int check_if_sorted(t_stack *stack);
 int count_size(t_stack *stack);
 t_node *create_node(long data);
 t_stack *create_stack(void);
+int	find_min(t_stack *stack);
 t_node *find_smallest(t_stack *stack);
 void	finish_rotation(t_stack **stack, t_node *top_node, char stack_name);
 void free_stack(t_stack **stack);
+long	ft_atol(const char *nptr);
+void	ft_putnbr_fd(int n, int fd);
 char	**ft_split(char *s, char c);
 char	*ft_strdup(char *s);
 size_t	ft_strlen(char *str);
@@ -48,6 +53,7 @@ void rra(t_stack **a);
 void rrb(t_stack **b);
 void rrr(t_stack **a, t_stack **b);
 void sa(t_stack **a);
+void	safe_push(t_stack **source, t_stack **dest, char *action);
 void sb(t_stack **b);
 void ss(t_stack **a, t_stack **b);
 void set_addition(t_stack *a, t_stack *b);
