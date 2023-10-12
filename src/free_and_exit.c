@@ -37,3 +37,25 @@ void	free_stack(t_stack **stack)
 	free(*stack);
 	*stack = NULL;
 }
+
+void	exit_error(t_stack **a, t_stack **b, char **numbers)
+{
+	int	i;
+
+	i = 0;
+	if (numbers)
+	{
+		while (numbers[i])
+		{
+			free(numbers[i]);
+			i++;
+		}
+		free(numbers);
+	}
+	if (a)
+		free_stack(a);
+	if (b)
+		free_stack(b);
+	write(1, "Error\n", 6);
+	exit(1);
+}

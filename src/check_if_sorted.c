@@ -29,6 +29,5 @@ int	check_if_sorted(t_stack *stack)
 		current = next_node;
 		next_node = next_node->next;
 	}
-	printf("Sorted\n");
 	return (1);
 }

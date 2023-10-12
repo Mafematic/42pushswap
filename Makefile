@@ -4,7 +4,7 @@ CFLAGS = -g -Wall -Werror -Wextra
 
 # Source dir and files
 SRC_DIR = src
-SRCS = src/append.c src/check_if_sorted.c src/count_size.c src/create_node.c src/create_stack.c src/find_smallest.c src/free_stack.c src/ft_atol.c src/ft_putnbr.c src/ft_split.c src/ft_strdup.c src/ft_substr.c src/ft_strlen.c src/init_nodes.c src/main.c src/move_nodes.c \
+SRCS = src/append.c src/check_if_sorted.c src/count_size.c src/create_node.c src/create_stack.c src/find_smallest.c src/free_and_exit.c src/ft_atol.c src/ft_putnbr.c src/ft_split.c src/ft_strdup.c src/ft_substr.c src/ft_strlen.c src/init_nodes.c src/main.c src/move_nodes.c \
 	src/pa_pb.c src/perform_rotation.c src/pushswap.c src/ra_rb_rr.c src/rra_rrb_rrr.c src/sa_sb_ss.c src/set_target_nodes.c src/sort_four_five.c src/sort_three.c 
 
 BONUS_SRC_DIR = bonus/src

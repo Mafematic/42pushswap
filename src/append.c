@@ -12,6 +12,40 @@
 
 #include "../inc/push_swap.h"
 
+int	is_duplicate(t_stack *a, int nbr)
+{
+	t_node	*current;
+
+	if (!a->head)
+		return (0);
+	current = a->head;
+	while (1)
+	{
+		if (current->data == nbr)
+			return (1);
+		current = current->next;
+		if (current == a->head)
+			break ;
+	}
+	return (0);
+}
+
+int	process_and_append_number(char *number_str, t_stack **a)
+{
+	long	nbr;
+
+	nbr = ft_atol(number_str);
+	if (nbr == 0 && number_str[0] != '0')
+		return (1);
+	if (nbr > INT_MAX || nbr < INT_MIN)
+		return (1);
+	if (is_duplicate(*a, (int)nbr))
+		return (1);
+	if (append(a, nbr) != 0)
+		return (1);
+	return (0);
+}
+
 int	append(t_stack **stack, long data)
 {
 	t_node	*new_node;
@@ -36,4 +70,3 @@ int	append(t_stack **stack, long data)
 	}
 	return (0);
 }
-
