@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../checker.h"
 
 static int	is_duplicate(t_stack *a, int nbr)
 {

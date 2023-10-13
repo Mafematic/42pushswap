@@ -9,7 +9,10 @@ SRCS = src/append.c src/check_if_sorted.c src/count_size.c src/create_node.c src
 
 BONUS_SRC_DIR = bonus/src
 BONUS_SRCS = bonus/src/get_next_line.c bonus/src/get_next_line_utils.c bonus/src/main.c \
-			bonus/src/create_stack.c
+			bonus/src/create_stack.c bonus/src/free_and_exit.c bonus/src/ft_strcmp.c bonus/src/pa_pb.c \
+			bonus/src/ra_rb_rr.c bonus/src/rra_rrb_rrr.c bonus/src/sa_sb_ss.c \
+			bonus/src/ft_split.c bonus/src/create_node.c bonus/src/ft_substr.c \
+			bonus/src/ft_strdup.c bonus/src/append.c bonus/src/ft_atol.c
 
 # Object files
 OBJ_DIR = obj
