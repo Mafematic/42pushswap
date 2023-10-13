@@ -10,7 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../checker.h"
+
+int is_empty(t_stack *stack) 
+{
+    return (stack == NULL || stack->head == NULL);
+}
 
 int	check_if_sorted(t_stack *stack)
 {

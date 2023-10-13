@@ -30,6 +30,7 @@ typedef struct s_stack
 } t_stack;
 
 int	append(t_stack **stack, long data);
+int	check_if_sorted(t_stack *stack);
 t_node	*create_node(long data);
 t_stack	*create_stack(void);
 void	exit_error(t_stack **a, t_stack **b, char **numbers);
@@ -43,6 +44,7 @@ char	*ft_strdup(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*get_next_line(int fd);
+int is_empty(t_stack *stack);
 int		pa(t_stack **a, t_stack **b);
 int		pb(t_stack **a, t_stack **b);
 int	process_and_append_number(char *number_str, t_stack **a); 

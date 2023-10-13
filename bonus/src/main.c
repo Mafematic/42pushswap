@@ -74,28 +74,37 @@ int     main(int argc, char **argv)
     display(a);
     while ((line = get_next_line(0)) != NULL)
     {
+        if (check_if_sorted(a) && is_empty(b))
+        {
+            write(1, "OK\n", 3);
+            break;
+        }
         if (ft_strcmp(line, "ra\n") == 0)
             ra(&a);
-        else if (ft_strcmp(line, "rb\n") == 0)
+        if (ft_strcmp(line, "rb\n") == 0)
             rb(&b);
-        else if (ft_strcmp(line, "rr\n") == 0)
+        if (ft_strcmp(line, "rr\n") == 0)
             rr(&a, &b);
-        else if (ft_strcmp(line, "rra\n") == 0)
+        if (ft_strcmp(line, "rra\n") == 0)
             rra(&a);
-        else if (ft_strcmp(line, "rrb\n") == 0)
+        if (ft_strcmp(line, "rrb\n") == 0)
             rrb(&b);
-        else if (ft_strcmp(line, "rrr\n") == 0)
+        if (ft_strcmp(line, "rrr\n") == 0)
             rrr(&a, &b);
-        else if (ft_strcmp(line, "sa\n") == 0)
+        if (ft_strcmp(line, "sa\n") == 0)
             sa(&a);
-        else if (ft_strcmp(line, "sb\n") == 0)
+        if (ft_strcmp(line, "sb\n") == 0)
             sb(&b);
-        else if (ft_strcmp(line, "pa\n") == 0)
+        if (ft_strcmp(line, "pa\n") == 0)
             pa(&a, &b);
-        else if (ft_strcmp(line, "pb\n") == 0)
+        if (ft_strcmp(line, "pb\n") == 0)
             pb(&a, &b);
-
         free(line);
+        if (check_if_sorted(a) && is_empty(b))
+        {
+            write(1, "OK\n", 3);
+            break;
+        }
     }
     display(a);
     return (0);
