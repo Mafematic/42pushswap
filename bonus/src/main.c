@@ -1,6 +1,13 @@
 #include "../checker.h"
 #include <stdio.h>
 
+//# define RED   "\x1B[31m"
+# define RED "\033[31m"
+# define GRN "\033[32m"
+//# define GRN   "\x1B[32m"
+//# define RESET "\x1B[0m"
+#define RESET "\033[0m"
+
 void display(t_stack *stack)
 {
 	if (!stack || !stack->head)
@@ -61,73 +68,99 @@ int     main(int argc, char **argv)
     char    *line;
     t_stack	*a;
     t_stack	*b;
+    int valid;
 
 	a = create_stack();
 	b = create_stack();
 	if (a == NULL || b == NULL)
-		exit_error(&a, &b, NULL);
-    if (argc == 2)
+    {
+        free_stack(&a);
+        free_stack(&b);
+        return 1;
+    }
+
+    if (argc == 1)
+    {
+        free_stack(&a);
+        free_stack(&b);
+        return 0;
+    }
+    else if (argc == 2)
 		process_single_arg(argv[1], &a, &b);
 	else
 		process_multiple_args(argc, argv, &a, &b);
-
-    display(a);
     while ((line = get_next_line(0)) != NULL)
     {
-        if (check_if_sorted(a) && is_empty(b))
-        {
-            write(1, "OK\n", 3);
-            break;
-        }
+        valid = 0;
         if (ft_strcmp(line, "ra\n") == 0)
-            ra(&a);
-        if (ft_strcmp(line, "rb\n") == 0)
-            rb(&b);
-        if (ft_strcmp(line, "rr\n") == 0)
-            rr(&a, &b);
-        if (ft_strcmp(line, "rra\n") == 0)
-            rra(&a);
-        if (ft_strcmp(line, "rrb\n") == 0)
-            rrb(&b);
-        if (ft_strcmp(line, "rrr\n") == 0)
-            rrr(&a, &b);
-        if (ft_strcmp(line, "sa\n") == 0)
-            sa(&a);
-        if (ft_strcmp(line, "sb\n") == 0)
-            sb(&b);
-        if (ft_strcmp(line, "pa\n") == 0)
-            pa(&a, &b);
-        if (ft_strcmp(line, "pb\n") == 0)
-            pb(&a, &b);
-        free(line);
-        if (check_if_sorted(a) && is_empty(b))
         {
-            write(1, "OK\n", 3);
+            ra(&a);
+            valid = 1;
+        }
+        if (ft_strcmp(line, "rb\n") == 0)
+        {
+            rb(&b);
+            valid = 1;
+        }
+        if (ft_strcmp(line, "rr\n") == 0)
+        {
+            rr(&a, &b);
+            valid = 1;
+        }
+        if (ft_strcmp(line, "rra\n") == 0)
+        {
+            rra(&a);
+            valid = 1;
+        }
+        if (ft_strcmp(line, "rrb\n") == 0)
+        {
+            rrb(&b);
+            valid = 1;
+        }
+        if (ft_strcmp(line, "rrr\n") == 0)
+        {
+            rrr(&a, &b);
+            valid = 1;
+        }
+        if (ft_strcmp(line, "sa\n") == 0)
+        {
+            sa(&a);
+            valid = 1;
+        }
+        if (ft_strcmp(line, "sb\n") == 0)
+        {
+            sb(&b);
+            valid = 1;
+        }
+        if (ft_strcmp(line, "pa\n") == 0)
+        {
+            pa(&a, &b);
+            valid = 1;
+        }
+        if (ft_strcmp(line, "pb\n") == 0)
+        {
+            pb(&a, &b);
+            valid = 1;
+        }
+        free(line);
+        if (!valid)
+        {
+            write(2, "Error\n", 6);
             break;
         }
     }
-    display(a);
-    return (0);
+    if (line == NULL && (!check_if_sorted(a) || !is_empty(b)))
+    {
+        write(1, RED"KO\n"RESET, 8);
+        free_stack(&a);
+	    free_stack(&b);
+        return 0;
+    }
+    else 
+    {
+        write(1, GRN "OK\n" RESET, 8);
+        free_stack(&a);
+	    free_stack(&b);
+        return 0;
+    }
 }
-
-/*
-function main(arguments):
-    stack_a = initialize_empty_stack()
-    stack_b = initialize_empty_stack()
-
-    for number in arguments:
-        push(stack_a, number)
-
-    while operation = read_from_stdin():
-        if operation == "ra":
-            rotate(stack_a)
-        elif operation == "pb":
-            push_b(stack_a, stack_b)
-        ...
-        # Add conditions for other operations
-
-    if is_sorted(stack_a) and is_empty(stack_b):
-        print("OK")
-    else:
-        print("KO")
-*/

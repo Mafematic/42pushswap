@@ -56,6 +56,6 @@ void	exit_error(t_stack **a, t_stack **b, char **numbers)
 		free_stack(a);
 	if (b)
 		free_stack(b);
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	exit(1);
 }

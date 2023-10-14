@@ -38,7 +38,7 @@ void	set_best_node(t_stack *b)
 		best_match_node->best_match = true;
 }
 
-void	set_addition(t_stack *a, t_stack *b)
+void	set_sum(t_stack *a, t_stack *b)
 {
 	int		len_a;
 	int		len_b;
@@ -95,6 +95,6 @@ void	init_nodes(t_stack *a, t_stack *b)
 	set_position(a);
 	set_position(b);
 	set_target_nodes(a, b);
-	set_addition(a, b);
+	set_sum(a, b);
 	set_best_node(b);
 }

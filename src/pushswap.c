@@ -20,7 +20,7 @@ static void	push_elements_to_b(t_stack **a, t_stack **b, int len)
 		{
 			free_stack(a);
 			free_stack(b);
-			write(1, "Error\n", 6);
+			write(2, "Error\n", 6);
 			exit(1);
 		}
 		write(1, "pb\n", 3);
