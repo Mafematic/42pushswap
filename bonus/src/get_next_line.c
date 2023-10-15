@@ -100,6 +100,15 @@ char	*get_next_line(int fd)
 	static char	*buffer[1024] = {NULL};
 	char		*line;
 
+	if (fd == -1)
+	{
+		if (buffer[0] != NULL)
+		{
+			free(buffer[0]);
+			buffer[0] = NULL;
+		}
+		return (NULL);
+	}
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
 	{
 		if (buffer[fd] != NULL)

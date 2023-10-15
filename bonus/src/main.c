@@ -146,7 +146,10 @@ int     main(int argc, char **argv)
         if (!valid)
         {
             write(2, "Error\n", 6);
-            break;
+            get_next_line(-1);
+            free_stack(&a);
+	        free_stack(&b);
+            return 1;
         }
     }
     if (line == NULL && (!check_if_sorted(a) || !is_empty(b)))
@@ -154,6 +157,7 @@ int     main(int argc, char **argv)
         write(1, RED"KO\n"RESET, 8);
         free_stack(&a);
 	    free_stack(&b);
+        get_next_line(-1);
         return 0;
     }
     else 
@@ -161,6 +165,7 @@ int     main(int argc, char **argv)
         write(1, GRN "OK\n" RESET, 8);
         free_stack(&a);
 	    free_stack(&b);
+        get_next_line(-1);
         return 0;
     }
 }
