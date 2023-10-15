@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fszendzi <fszendzi@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/15 17:49:17 by fszendzi          #+#    #+#             */
+/*   Updated: 2023/10/15 17:49:24 by fszendzi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../checker.h"
 
 size_t	ft_strlen(char *str)
@@ -63,4 +75,21 @@ char	*ft_strjoin(char *s1, char *s2)
 		dest[i + j] = s2[j];
 	dest[i + j] = '\0';
 	return (dest);
+}
+
+void	free_buffer(char **buffer, int fd)
+{
+	if (fd == -1)
+	{
+		if (buffer[0] != NULL)
+		{
+			free(buffer[0]);
+			buffer[0] = NULL;
+		}
+	}
+	else if (buffer[fd] != NULL)
+	{
+		free(buffer[fd]);
+		buffer[fd] = NULL;
+	}
 }

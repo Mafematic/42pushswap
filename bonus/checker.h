@@ -1,9 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fszendzi <fszendzi@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/15 18:45:29 by fszendzi          #+#    #+#             */
+/*   Updated: 2023/10/15 18:45:31 by fszendzi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CHECKER_H
 # define CHECKER_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 50
 # endif
+
+# define RED "\033[31m"
+# define GRN "\033[32m"
+# define RESET "\033[0m"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -25,16 +41,17 @@ typedef struct s_node
 
 typedef struct s_stack
 {
-	t_node *head;
-	t_node *tail;
-} t_stack;
+	t_node	*head;
+	t_node	*tail;
+}	t_stack;
 
-int	append(t_stack **stack, long data);
-int	check_if_sorted(t_stack *stack);
+int		append(t_stack **stack, long data);
+int		check_if_sorted(t_stack *stack);
 t_node	*create_node(long data);
 t_stack	*create_stack(void);
 void	exit_error(t_stack **a, t_stack **b, char **numbers);
 void	free_stack(t_stack **stack);
+void	free_buffer(char **buffer, int fd);
 long	ft_atol(const char *nptr);
 char	**ft_split(char *s, char c);
 size_t	ft_strlen(char *str);
@@ -44,10 +61,10 @@ char	*ft_strdup(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*get_next_line(int fd);
-int is_empty(t_stack *stack);
+int		is_empty(t_stack *stack);
 int		pa(t_stack **a, t_stack **b);
 int		pb(t_stack **a, t_stack **b);
-int	process_and_append_number(char *number_str, t_stack **a); 
+int		process_and_append_number(char *number_str, t_stack **a); 
 void	ra(t_stack **a);
 void	rb(t_stack **b);
 void	rr(t_stack **a, t_stack **b);

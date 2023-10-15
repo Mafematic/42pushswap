@@ -58,6 +58,12 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
-    "checker.h": "c"
-  }
+    "checker.h": "c",
+    "unistd.h": "c",
+    "stdlib.h": "c",
+    "stdio.h": "c",
+    "stdbool.h": "c"
+  },
+  "editor.insertSpaces": false,
+  "editor.detectIndentation": false
 }
