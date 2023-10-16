@@ -45,6 +45,12 @@ typedef struct s_stack
 	t_node	*tail;
 }	t_stack;
 
+typedef struct {
+    char *op_name;
+    void (*op_func)(t_stack **, t_stack **);
+} t_operation;
+
+
 int		append(t_stack **stack, long data);
 int		check_if_sorted(t_stack *stack);
 t_node	*create_node(long data);
