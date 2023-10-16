@@ -48,60 +48,27 @@ void	process_single_arg(char *arg, t_stack **a, t_stack **b)
 	free(numbers);
 }
 
-void initialize_stacks(t_stack **a, t_stack **b)
+void	initialize_stacks(t_stack **a, t_stack **b)
 {
-    *a = create_stack();
-    *b = create_stack();
-    if (*a == NULL || *b == NULL)
-    {
-        free_stack(a);
-        free_stack(b);
-        exit(1);
-    }
+	*a = create_stack();
+	*b = create_stack();
+	if (*a == NULL || *b == NULL)
+	{
+		free_stack(a);
+		free_stack(b);
+		exit(1);
+	}
 }
 
-void process_args(int argc, char **argv, t_stack **a, t_stack **b)
+void	process_args(int argc, char **argv, t_stack **a, t_stack **b)
 {
-    if (argc == 1)
-        return;
-    else if (argc == 2)
-        process_single_arg(argv[1], a, b);
-    else
-        process_multiple_args(argc, argv, a, b);
+	if (argc == 1)
+		return ;
+	else if (argc == 2)
+		process_single_arg(argv[1], a, b);
+	else
+		process_multiple_args(argc, argv, a, b);
 }
-
-void cleanup_stacks(t_stack **a, t_stack **b)
-{
-    free_stack(a);
-    free_stack(b);
-    get_next_line(-1);
-}
-
-int is_valid_operation(char *line) {
-    char *valid_operations[] = {"ra\n", "rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n", "sa\n", "sb\n", "pa\n", "pb\n", NULL};
-    
-    for (int i = 0; valid_operations[i]; i++) {
-        if (ft_strcmp(line, valid_operations[i]) == 0) {
-            return 1;
-        }
-    }
-    return 0;
-}
-
-void execute_command(char *line, t_stack **a, t_stack **b) {
-    if (ft_strcmp(line, "ra\n") == 0) ra(a);
-    else if (ft_strcmp(line, "rb\n") == 0) rb(b);
-    else if (ft_strcmp(line, "rr\n") == 0) rr(a, b);
-    else if (ft_strcmp(line, "rra\n") == 0) rra(a);
-    else if (ft_strcmp(line, "rrb\n") == 0) rrb(b);
-    else if (ft_strcmp(line, "rrr\n") == 0) rrr(a, b);
-    else if (ft_strcmp(line, "sa\n") == 0) sa(a);
-    else if (ft_strcmp(line, "sb\n") == 0) sb(b);
-    else if (ft_strcmp(line, "pa\n") == 0) pa(a, b);
-    else if (ft_strcmp(line, "pb\n") == 0) pb(a, b);
-}
-
-
 
 int	main(int argc, char **argv)
 {
@@ -115,18 +82,9 @@ int	main(int argc, char **argv)
 	while (line != NULL)
 	{
 		if (is_valid_operation(line))
-		{
-        	execute_command(line, &a, &b);
-    	} 
-		else 
-		{
-			write(2, "Error\n", 6);
-			free(line);
-			get_next_line(-1);
-			free_stack(&a);
-			free_stack(&b);
-			return (1);
-		}
+			execute_command(line, &a, &b);
+		else
+			return (terminate_with_error(line, &a, &b));
 		free(line);
 		line = get_next_line(0);
 	}

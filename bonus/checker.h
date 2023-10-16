@@ -45,16 +45,12 @@ typedef struct s_stack
 	t_node	*tail;
 }	t_stack;
 
-typedef struct {
-    char *op_name;
-    void (*op_func)(t_stack **, t_stack **);
-} t_operation;
-
-
 int		append(t_stack **stack, long data);
 int		check_if_sorted(t_stack *stack);
+void	cleanup_stacks(t_stack **a, t_stack **b);
 t_node	*create_node(long data);
 t_stack	*create_stack(void);
+void	execute_command(char *line, t_stack **a, t_stack **b);
 void	exit_error(t_stack **a, t_stack **b, char **numbers);
 void	free_stack(t_stack **stack);
 void	free_buffer(char **buffer, int fd);
@@ -68,6 +64,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*get_next_line(int fd);
 int		is_empty(t_stack *stack);
+int		is_valid_operation(char *line);
 int		pa(t_stack **a, t_stack **b);
 int		pb(t_stack **a, t_stack **b);
 int		process_and_append_number(char *number_str, t_stack **a); 
@@ -80,5 +77,6 @@ void	rrr(t_stack **a, t_stack **b);
 void	sa(t_stack **a);
 void	sb(t_stack **b);
 void	ss(t_stack **a, t_stack **b);
+int		terminate_with_error(char *line, t_stack **a, t_stack **b);
 
 #endif
